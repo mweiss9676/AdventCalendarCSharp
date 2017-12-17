@@ -1,0 +1,7 @@
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\obj\Debug\AdventCalendar2017.csproj.CoreCompileInputs.cache
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\bin\Debug\AdventCalendar2017.exe.config
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\bin\Debug\AdventCalendar2017.exe
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\bin\Debug\AdventCalendar2017.pdb
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\obj\Debug\AdventCalendar2017.exe
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\obj\Debug\AdventCalendar2017.pdb
+C:\Users\Michael\source\repos\AdventCalendar2017\AdventCalendar2017\obj\Debug\AdventCalendar2017.csprojResolveAssemblyReference.cache
