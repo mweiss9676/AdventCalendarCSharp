@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-//program to achieve this http://adventofcode.com/2017/day/10
+//this program written to achieve this: http://adventofcode.com/2017/day/10
 namespace AdventCalendar2017
 {
     class Day10
