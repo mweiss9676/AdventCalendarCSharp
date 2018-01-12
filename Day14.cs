@@ -4,62 +4,75 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-//this program written to achieve this: http://adventofcode.com/2017/day/10
+//UGLIEST CODE EVERRRRRRRRR!!!!!!!
+//this program written to achieve this: http://adventofcode.com/2017/day/14
 namespace AdventCalendar2017
 {
-    class Day10Part2
+    class Day14
     {
         //denseHash will be what we convert for out final output so I have made it class level and static
         //it is designed to hold our 16 XOR'd numbers
-        static List<int> denseHash = new List<int>();
+    
+
+        static int globalcount = 0;
+        static int row = 0;
 
         public static void Main(string[] args)
         {
             //create a list populated with the numbers 0-255 as per the instructions
-            List<int> input = new List<int>();
-            for (int i = 0; i < 256; i++) { input.Add(i); }
 
-            //a list to hold our "lengths" that we are basing our iterations on
-            List<int> rules = new List<int> { 225, 171, 131, 2, 35, 5, 0, 13, 1, 246, 54, 97, 255, 98, 254, 110 };
-            
-            //List<int> rules = new List<int> { 1,2,3 }; //(this is a list I was using to test)
-
-            //run a KnotHash function on our list of 255 numbers sequential, and our "lengths" converted to their ASCII counterparts
-            KnotHash(input, AsciiConverter(rules));
-
-            //denseHash.ForEach(x => Console.Write(x + " ")); (these 2 lines were used for testing)
-            //Console.WriteLine();
-
-            //write the results of our 16 denseHash elements as their hexadecimal counterparts. The "x2" is the conversion and the 
-            //number of relevant digits respectively.
-            denseHash.ForEach(x => Console.Write("{0}", x.ToString("x2")));
+            InputIfied("stpzcrnm");
         }
 
-        static List<int> AsciiConverter(List<int> rules)
+        //creates a list of strings of the required value to be hashed and appends them with the digits 0-127
+        //also creates a new list of the values 0-255 for knothashing
+        //then for some reason I call knothash from within this method
+        static void InputIfied(string s)
         {
+            List<int> input;
+            string inputCopy = s;
+            for (int i = 0; i < 128; i++)
+            {
+                input = new List<int>();
+                for (int j = 0; j < 256; j++) { input.Add(j); }
+                s = inputCopy;
+                s += "-" + i;
+                KnotHash(input: input, rules: AsciiConverter(s.ToCharArray()));
+            }
+
+        }
+
+        //creates an ASCII conversion of each InputIfied string (i.e. stpzcrnm-1 becomes 115 116 112 122 99 114 110 109 45 48 17 31 73 47 23)
+        static List<int> AsciiConverter(char[] rules)
+        {
+            List<int> rulesReturn = new List<int>();
             int size = rules.Count();
 
-            //concatenate all integers in rules as comma separated values in a string
-            string rulesString = string.Join(",", rules.ToArray());
-
-            foreach (char c in rulesString)
-            {
-                //converting characters to integers creates their ASCII counterparts
-                int unicode = c;
-                rules.Add(unicode);
-            }
-            rules.RemoveRange(0, size);
+                foreach (char c in rules)
+                {
+                    //Console.WriteLine(c);
+                    //converting characters to integers creates their ASCII counterparts
+                    int unicode = c;
+                    rulesReturn.Add(unicode);
+                }
 
             //add this end sequence as provided by the instructions
             int[] endSequence = { 17, 31, 73, 47, 23 };
 
-            rules.AddRange(endSequence);
-            return rules;
+            rulesReturn.AddRange(endSequence);
+            Console.WriteLine("ascii is: ");
+            rulesReturn.ForEach(x => Console.Write(x + " "));
+            Console.WriteLine();
+            return rulesReturn;
         }
 
+        //got here from KnotHash method
+        //XORs each KnotHashed result and stores the XORs in a denseHash list
+        //calls the final method CountOnes to count all of the 1's in the denseHash
         static void BitwiseXOR(List<int> input)
         {
+            List<int> denseHash = new List<int>();
+
             //temp is a temporary storage place for our XOR function to act upon. It holds our input 16 digits at a time.
             List<int> temp;
             int length = input.Count();
@@ -83,9 +96,54 @@ namespace AdventCalendar2017
                 //add each XOR aggregate integer to our denseHash list of 16 ints
                 denseHash.Add(XOR);
             }
-            //denseHash.ForEach(x => Console.WriteLine("denseHash: " + x) ); (used for testing)
+            Console.WriteLine("every value in hex is: ");
+            denseHash.ForEach(x => Console.Write("{0} ", x.ToString("x2")));
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("every value post-Xor is: ");
+            denseHash.ForEach(x => Console.Write(x + " "));
+            Console.WriteLine();
+            Console.WriteLine();
+            denseHash.ForEach(x => Console.Write("{0} ", Convert.ToString(x, 2)));
+            Console.WriteLine("end row");
+            CountOnes(denseHash);
+
+            
         }
 
+        //counts all the ones in the denseHash list by converting them to strings and seeing the chars in the strings are 1's
+        //if so they add their particular number of 1's to the global static variable global count and write this information to the console.
+        static void CountOnes(List<int> d)
+        {
+            List<string> copy = new List<string>();
+            foreach (int i in d)
+            {
+                copy.Add((Convert.ToString(i, 2)));
+            }
+
+            copy.ForEach(x => Console.Write(x + " "));
+            Console.WriteLine();
+            int count = 0;
+            foreach (string s in copy)
+            {
+                foreach (char c in s)
+                {
+                    if (c.Equals('1'))
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            globalcount += count;
+            Console.WriteLine("count is: {0} and row is {1}", count, row);
+            row++;
+            Console.WriteLine("global count is: " + globalcount);
+        }
+
+        //code from Day10 part2
+        //got here from the Inputified method
+        //calls BitwiseXOR method on the result of this
         static void KnotHash(List<int> input, List<int> rules)
         {
             int sizeOfInput = input.Count;
@@ -99,7 +157,7 @@ namespace AdventCalendar2017
                 for (int j = 0; j < rules.Count; j++)
                 {
 
-                    
+
                     int currentPositionCopy = currentPosition;
                     int currentPositionCopy2 = currentPosition;
                     currentSubSetCount = rules[j];
@@ -158,7 +216,6 @@ namespace AdventCalendar2017
                     skipNumber++;
                 }
             }
-            //foreach (int i in input) { Console.Write(i + ","); }
             BitwiseXOR(input);
         }
     }
