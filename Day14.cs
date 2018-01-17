@@ -21,7 +21,8 @@ namespace AdventCalendar2017
         {
             //create a list populated with the numbers 0-255 as per the instructions
 
-            InputIfied("stpzcrnm");
+            //InputIfied("stpzcrnm"); // this is the real value
+            InputIfied("flqrgnkx"); //this is the example/testing input
         }
 
         //creates a list of strings of the required value to be hashed and appends them with the digits 0-127
@@ -60,9 +61,9 @@ namespace AdventCalendar2017
             int[] endSequence = { 17, 31, 73, 47, 23 };
 
             rulesReturn.AddRange(endSequence);
-            Console.WriteLine("ascii is: ");
-            rulesReturn.ForEach(x => Console.Write(x + " "));
-            Console.WriteLine();
+            //Console.WriteLine("ascii is: ");
+            //rulesReturn.ForEach(x => Console.Write(x + " "));
+            //Console.WriteLine();
             return rulesReturn;
         }
 
@@ -96,16 +97,16 @@ namespace AdventCalendar2017
                 //add each XOR aggregate integer to our denseHash list of 16 ints
                 denseHash.Add(XOR);
             }
-            Console.WriteLine("every value in hex is: ");
-            denseHash.ForEach(x => Console.Write("{0} ", x.ToString("x2")));
+            //Console.WriteLine("every value in hex is: ");
+            //denseHash.ForEach(x => Console.Write("{0} ", x.ToString("x2")));
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //Console.WriteLine("every value post-Xor is: ");
+            //denseHash.ForEach(x => Console.Write(x + " "));
+            //Console.WriteLine();
+            //Console.WriteLine();
+            denseHash.ForEach(x => Console.Write("{0}", Convert.ToString(x, 2).PadLeft(8, '0')));
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("every value post-Xor is: ");
-            denseHash.ForEach(x => Console.Write(x + " "));
-            Console.WriteLine();
-            Console.WriteLine();
-            denseHash.ForEach(x => Console.Write("{0} ", Convert.ToString(x, 2)));
-            Console.WriteLine("end row");
             CountOnes(denseHash);
 
             
@@ -121,8 +122,8 @@ namespace AdventCalendar2017
                 copy.Add((Convert.ToString(i, 2)));
             }
 
-            copy.ForEach(x => Console.Write(x + " "));
-            Console.WriteLine();
+            //copy.ForEach(x => Console.Write(x + " "));
+            //Console.WriteLine();
             int count = 0;
             foreach (string s in copy)
             {
@@ -136,9 +137,9 @@ namespace AdventCalendar2017
             }
 
             globalcount += count;
-            Console.WriteLine("count is: {0} and row is {1}", count, row);
-            row++;
-            Console.WriteLine("global count is: " + globalcount);
+            //Console.WriteLine("count is: {0} and row is {1}", count, row);
+            //row++;
+            //Console.WriteLine("global count is: " + globalcount);
         }
 
         //code from Day10 part2
