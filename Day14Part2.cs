@@ -11,12 +11,17 @@ namespace AdventCalendar2017
     {
         static Queue<char> Regions = new Queue<char>(new char[] { '2', '3', '4', '5' });
         static List<char> position = new List<char>();
-
+        ConsoleColor[] colors = (ConsoleColor[])ConsoleColor.GetValues(typeof(ConsoleColor));
+        //static Queue<ConsoleColor> colorQueue = new Queue<ConsoleColor>(new ConsoleColor[]) { ConsoleColor.Red, ConsoleColor.Green });
 
         static void Main(string[] args)
         {
+            int x = 5;
+            ConsoleColor color = (ConsoleColor)x;
+            
+
             char[][] inputArray = new char[127][];
-            StreamReader file = new StreamReader(@"C:\Users\Michael\Desktop\knothash_input_day14_2_TEST.txt");
+            StreamReader file = new StreamReader(@"C: \Users\Michael Weiss\Desktop\knothash_input_day14_2_TEST.txt");
 
             //this assignment in the if statement is a major pain in the ass, don't forget it!!!
             if ((inputArray[0] = file.ReadLine().ToArray()) != null)
@@ -37,7 +42,43 @@ namespace AdventCalendar2017
             //
             foreach (char[] ch in inputArray)
             {
-                foreach (char c in ch) { Console.Write(c); }
+                foreach (char c in ch)
+                {
+                    //Console.Write(c);
+                    if (c == '0')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write(c);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    if (c == '2')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.Write(c);
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    if (c == '3')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.Write(c);
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                    }
+                    if (c == '4')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.Write(c);
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                    }
+                    if (c == '5')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.Write(c);
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                    }
+                }
                 Console.WriteLine();
             }
             foreach (int i in position) { Console.WriteLine(i + " "); }
@@ -50,16 +91,29 @@ namespace AdventCalendar2017
                 for (int j = 0; j < inputArray[i].Length; j++)
                 {
                     char letter;
-                    if (i + 1 < inputArray.Length && Regions.Contains(inputArray[i + 1][j])) { letter = inputArray[i + 1][j]; }
-                    else if (i - 1 >= 0 && Regions.Contains(inputArray[i - 1][j])) { letter = inputArray[i - 1][j]; }
+                    if (inputArray[i][j] == '1')
+                    {
+                    }
+                    //char right = inputArray[i + 1][j];
+
+                    // comment
+                    if (i + 1 < inputArray.Length && Regions.Contains(inputArray[i + 1][j])) // Check Right
+                    {
+                        letter = inputArray[i + 1][j];
+                    }
+                    //else if (i - 1 >= 0 && Regions.Contains(inputArray[i - 1][j]))
+                    //{
+                    //    letter = inputArray[i - 1][j];
+                    //}
                     else if (j + 1 < inputArray[i].Length && Regions.Contains(inputArray[i][j + 1])) { letter = inputArray[i][j + 1]; }
-                    else if (j - 1 >= 0 && Regions.Contains(inputArray[i][j - 1])) { letter = inputArray[i][j - 1]; }
+                    //else if (j - 1 >= 0 && Regions.Contains(inputArray[i][j - 1])) { letter = inputArray[i][j - 1]; }
                     else if (Regions.Contains(inputArray[i][j])) { letter = inputArray[i][j]; }
                     else
                     {
                         letter = Regions.Dequeue();
                     }
 
+                    
                     if (inputArray[i][j] == '1' || inputArray[i][j] == '2' || inputArray[i][j] == '3' || inputArray[i][j] == '4' || inputArray[i][j] == '5')
                     {
                         FloodFill(ref inputArray[i][j], letter);
@@ -73,13 +127,13 @@ namespace AdventCalendar2017
                         }
                         i -= count;
                         count = 0;
-                        while (i - 1 >= 0 && inputArray[i - 1][j] == '1')
-                        {
-                            count++;
-                            i--;
-                            FloodFill(ref inputArray[i][j], letter);
-                        }
-                        i += count;
+                        //while (i - 1 >= 0 && inputArray[i - 1][j] == '1')
+                        //{
+                        //    count++;
+                        //    i--;
+                        //    FloodFill(ref inputArray[i][j], letter);
+                        //}
+                        //i += count;
                         count = 0;
                         while (j + 1 < inputArray[i].Length && inputArray[i][j + 1] == '1')
                         {
@@ -89,13 +143,13 @@ namespace AdventCalendar2017
                         }
                         j -= count;
                         count = 0;
-                        while (j - 1 >= 0 && inputArray[i][j - 1] == '1')
-                        {
-                            count++;
-                            j--;
-                            FloodFill(ref inputArray[i][j], letter);
-                        }
-                        j += count;
+                        //while (j - 1 >= 0 && inputArray[i][j - 1] == '1')
+                        //{
+                        //    count++;
+                        //    j--;
+                        //    FloodFill(ref inputArray[i][j], letter);
+                        //}
+                        //j += count;
                     }
 
                     Regions.Enqueue(letter);
@@ -105,6 +159,7 @@ namespace AdventCalendar2017
 
         static void FloodFill(ref char c, char letter)
         {
+
             char temp = letter;
             c = temp;
         }
