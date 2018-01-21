@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>AdventCalendar2017.Day14Part2</StartupObject>
+    <StartupObject>AdventCalendar2017.Day15Part2</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="colors.cs" />
     <Compile Include="Day10.cs" />
     <Compile Include="Day10Part2.cs" />
     <Compile Include="Day11.cs" />
@@ -54,6 +53,8 @@
     <Compile Include="Day13.cs" />
     <Compile Include="Day14.cs" />
     <Compile Include="Day14Part2.cs" />
+    <Compile Include="Day15.cs" />
+    <Compile Include="Day15Part2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
