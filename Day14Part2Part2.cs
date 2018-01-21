@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace AdventCalendar2017
 {
+
+    //This code "works" but produces an answer that is consistently off by 10 for an undetermined reason.
     class Day14Part2Part2
     {
-        static Queue<char> Regions = new Queue<char>(new char[] { '2', '3', '4', '5', '6', '7', '8'});
+        static Queue<char> Regions = new Queue<char>(new char[] { '2', '3', '4', '5', '6', '7', '8', '9'});
         static char letter;
         static char[][] inputArray = new char[127][];
-        static char compare;
+
+        static int count = 0;
 
 
         static void Main(string[] args)
         {
-            StreamReader file = new StreamReader(@"C: \Users\Michael Weiss\Desktop\knothash_input_day14_2_TEST.txt");
+            StreamReader file = new StreamReader(@"C: \Users\Michael Weiss\Desktop\knothash_input_day14_2.txt");
 
             //this assignment in the if statement is a major pain in the ass, don't forget it!!!
             if ((inputArray[0] = file.ReadLine().ToArray()) != null)
@@ -29,23 +32,23 @@ namespace AdventCalendar2017
             }
             file.Close();
 
-            for (int i = 0; i < inputArray.Length; i++)
+            for (int verticalPosition = 0; verticalPosition < inputArray.Length; verticalPosition++)
             {
-                for (int j = 0; j < inputArray[i].Length; j++)
+                for (int horizontalPosition = 0; horizontalPosition < inputArray[verticalPosition].Length; horizontalPosition++)
                 {
-                    if (Regions.Contains(inputArray[i][j]))
+                    if (Regions.Contains(inputArray[verticalPosition][horizontalPosition]) || inputArray[verticalPosition][horizontalPosition] == '0')
                     {
                         continue;
                     }
-                    if (inputArray[i][j] == '1')
+                    if (inputArray[verticalPosition][horizontalPosition] == '1')
                     {
+                        count++;
                         letter = Regions.Dequeue();
-                        FloodFill(i, j);
+                        FloodFill(verticalPosition, horizontalPosition);
                     }
-                    compare = letter;
-                    if (compare != Regions.Peek())
-                    {
 
+                    if (!Regions.Contains(letter))
+                    {
                         Regions.Enqueue(letter);
                     }
                 }
@@ -111,40 +114,49 @@ namespace AdventCalendar2017
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
+                    if (c == '9')
+                    {
+                        Console.BackgroundColor = ConsoleColor.Magenta;
+                        Console.Write(c);
+                        Console.BackgroundColor = ConsoleColor.Black;
+
+                    }
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine($"And the total number of regions is {count}.");
+
         }
 
         //checks the array for 1's and changes the 1's
-        public static void FloodFill(int a, int b)
+        public static void FloodFill(int i, int j)
         {
             //current position in the input array is defined by int a and b
             //if c is equal to '1' then great
             //else move on to the next one
 
-            int horizontalPosition = a;
-            int verticalPosition = b;
+            int verticalPosition = i;
+            int horizontalPosition = j;
 
 
-            characterChanger(ref inputArray[horizontalPosition][verticalPosition]);
+            characterChanger(ref inputArray[verticalPosition][horizontalPosition]);
 
 
-            if (verticalPosition - 1 >= 0 && inputArray[horizontalPosition][verticalPosition - 1] == '1')
+            if (horizontalPosition - 1 >= 0 && inputArray[verticalPosition][horizontalPosition - 1] == '1')
             {
-                FloodFill(horizontalPosition, verticalPosition - 1);
+                FloodFill(verticalPosition, horizontalPosition - 1);
             }
-            if (verticalPosition + 1 < inputArray[horizontalPosition].Length && inputArray[horizontalPosition][verticalPosition + 1] == '1')
+            if (horizontalPosition + 1 < inputArray[verticalPosition].Length && inputArray[verticalPosition][horizontalPosition + 1] == '1')
             {
-                FloodFill(horizontalPosition, verticalPosition + 1);
+                FloodFill(verticalPosition, horizontalPosition + 1);
             }
-            if (horizontalPosition + 1 < inputArray.Length && inputArray[horizontalPosition + 1][verticalPosition] == '1')
+            if (verticalPosition + 1 < inputArray.Length && inputArray[verticalPosition + 1][horizontalPosition] == '1')
             {
-                FloodFill(horizontalPosition + 1, verticalPosition);
+                FloodFill(verticalPosition + 1, horizontalPosition);
             }
-            if (horizontalPosition - 1 >= 0 && inputArray[horizontalPosition - 1][verticalPosition] == '1')
+            if (verticalPosition - 1 >= 0 && inputArray[verticalPosition - 1][horizontalPosition] == '1')
             {
-                FloodFill(horizontalPosition - 1, verticalPosition);
+                FloodFill(verticalPosition - 1, horizontalPosition);
             }
 
         }
