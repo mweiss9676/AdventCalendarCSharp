@@ -12,67 +12,81 @@ namespace AdventCalendar2017
     {
         public static void Main(string[] args)
         {
-            List<int> input = new List<int>();
-            for (int i = 0; i < 256; i++) { input.Add(i); }
+            List<int> integersToHash = new List<int>();
+
+            for (int i = 0; i < 256; i++)
+            {
+                integersToHash.Add(i);
+            
+            }
+
             List<int> rules = new List<int> { 225, 171, 131, 2, 35, 5, 0, 13, 1, 246, 54, 97, 255, 98, 254, 110 };
-            someFunction(input, rules);
+
+            Console.WriteLine(KnotHash(integersToHash, rules));
         }
 
-        static void someFunction(List<int> input, List<int> rules)
+        static int KnotHash(List<int> integersToHash, List<int> rules)
         {
-            int sizeOfInput = input.Count;
+            int result = 0;
+            int integersToHashSize = integersToHash.Count;
             int skipNumber = 0;
             int subset = 0;
-            int currentSubSetCount = 0;
-            int currentPosition = 0;
+            int currentSubSetSize = 0;
+            int currentIndex = 0;
 
-            for (int j = 0; j < rules.Count; j++)
+            for (int i = 0; i < rules.Count; i++)//iterate through all of the rules of the hashing algorithm
             {
-                int currentPositionCopy = currentPosition;
-                int currentPositionCopy2 = currentPosition;
-                currentSubSetCount = rules[j];
-                int subsetIterator = subset;
-                List<int> copy2 = new List<int>();
-                List<int> temp = new List<int>();
+                    int copyOfCurrentIndex1 = currentIndex;//we need two extra copies of this index value because it is used to iterate through our
+                    int copyOfCurrentIndex2 = currentIndex;//loops and also to calculate its own next value
 
-                for (int i = 0; i < sizeOfInput; i++)
-                {
-                    if (currentPosition < sizeOfInput)
-                    {
-                        copy2.Add(input[currentPosition]);
+                    currentSubSetSize = rules[i];
+                    int subsetIterator = subset;
+                    List<int> copyOfIntegersToHash = new List<int>();
 
-                    }
-                    else
+                    for (int j = 0; j < integersToHashSize; j++)//iterate through the numbers to hash (0 - 255)
                     {
-                        currentPosition = 0;
-                        copy2.Add(input[currentPosition]);
+                        if (currentIndex < integersToHashSize)//while the current index is less than the the size of the integersToHash we 
+                                                                 //simply copy each digit to the 0th index of the copy list
+                        {
+                            copyOfIntegersToHash.Add(integersToHash[currentIndex]);
+                        }
+                        else                                     //if the current index goes out of the bounds of the list we update the 
+                                                                 //current index to zero and continue adding the nums 0-255 to our copy
+                        {
+                            currentIndex = 0;
+                            copyOfIntegersToHash.Add(integersToHash[currentIndex]);
+                        }
+                        currentIndex++;
                     }
-                    currentPosition++;
-                }
-                temp = copy2.GetRange(0, currentSubSetCount);
-                temp.Reverse();
-                copy2.RemoveRange(0, currentSubSetCount);
-                copy2.InsertRange(0, temp);
 
-                for (int k = 0; k < sizeOfInput; k++)
-                {
-                    if (currentPositionCopy < sizeOfInput)
+                    List<int> temp = new List<int>(); //a list used to reverse the subset
+                    temp = copyOfIntegersToHash.GetRange(0, currentSubSetSize);//we grab the subset indicated by our rules and reverse it
+                    temp.Reverse();
+                    copyOfIntegersToHash.RemoveRange(0, currentSubSetSize);//we replace our copy of 0-255 list with our reversed numbers starting
+                    copyOfIntegersToHash.InsertRange(0, temp);             //with the 0th index
+
+
+                    for (int j = 0; j < integersToHashSize; j++)
                     {
-                        input[currentPositionCopy] = copy2[k];
+                        if (copyOfCurrentIndex1 < integersToHashSize)//while the current index is within the bounds of the list we copy
+                        {                                            //the values in the copy of our main list back into the official list
+                            integersToHash[copyOfCurrentIndex1] = copyOfIntegersToHash[j];
+                        }
+                        else                                         //once the current index would go out of bounds of the array we reset the index
+                        {                                            //and continue to add the copy values back into the official list
+                            copyOfCurrentIndex1 = 0;
+                            integersToHash[copyOfCurrentIndex1] = copyOfIntegersToHash[j];
+                        }
+                        copyOfCurrentIndex1++;
                     }
-                    else
-                    {
-                        currentPositionCopy = 0;
-                        input[currentPositionCopy] = copy2[k];
-                    }
-                    currentPositionCopy++;
-                }
-                currentPosition = (currentSubSetCount + skipNumber + currentPositionCopy2) % sizeOfInput;
-                currentPositionCopy2 = currentPosition;
-                skipNumber++;
+
+                    currentIndex = (currentSubSetSize + skipNumber + copyOfCurrentIndex2) % integersToHashSize; //this algorithm properly updates
+                    copyOfCurrentIndex2 = currentIndex;                                                         //the current index, accounting for
+                    skipNumber++;                                                                               //the zero indexing of our algorithm
             }
-            foreach (int i in input) { Console.Write(i + ","); }
 
+            result = integersToHash[0] * integersToHash[1];//as per the instructions the result of the hash
+            return result;                                 //is the product of the first 2 values of the list 0-255
         }
     }
 }
