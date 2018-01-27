@@ -132,6 +132,8 @@ namespace AdventCalendar2017
 
                     }
                 }
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
             }
             Console.WriteLine($"And the total number of regions is {count}.");
