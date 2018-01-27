@@ -20,7 +20,7 @@ namespace AdventCalendar2017
 
         static void Main(string[] args)
         {
-            StreamReader file = new StreamReader(@"C: \Users\Michael Weiss\Desktop\knothash_input_day14_2.txt");
+            StreamReader file = new StreamReader(@"C:\Users\Michael Weiss\repo-ster\AdventCalendarCSharp\inputs\knothash_input_day14_2.txt");
 
             //this assignment in the if statement is a major pain in the ass, don't forget it!!!
             if ((inputArray[0] = file.ReadLine().ToArray()) != null)
@@ -54,74 +54,86 @@ namespace AdventCalendar2017
                 }
             }
 
+            Console.SetWindowSize(130, 35);//sets the appropriate width to display the regions
+
             //colors the regions and prints them to console.
             foreach (char[] ch in inputArray)
             {
                 foreach (char c in ch)
                 {
-                    //Console.Write(c);
                     if (c == '0')
                     {
                         Console.BackgroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                     if (c == '2')
                     {
-                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.ForegroundColor = ConsoleColor.DarkBlue;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                     if (c == '3')
                     {
                         Console.BackgroundColor = ConsoleColor.Blue;
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                     if (c == '4')
                     {
-                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.BackgroundColor = ConsoleColor.DarkCyan;
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                     if (c == '5')
                     {
-                        Console.BackgroundColor = ConsoleColor.Green;
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                     if (c == '6')
                     {
-                        Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.BackgroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                     if (c == '7')
                     {
-                        Console.BackgroundColor = ConsoleColor.DarkGreen;
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                     if (c == '8')
                     {
-                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                     if (c == '9')
                     {
-                        Console.BackgroundColor = ConsoleColor.Magenta;
+                        Console.BackgroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.Write(c);
                         Console.BackgroundColor = ConsoleColor.Black;
 
                     }
                 }
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine();
             }
             Console.WriteLine($"And the total number of regions is {count}.");
