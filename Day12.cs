@@ -6,6 +6,8 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
+
+//written to solve http://adventofcode.com/2017/day/12
 namespace AdventCalendar2017
 {
     class Day12
@@ -18,7 +20,7 @@ namespace AdventCalendar2017
 
         static void Main(string[] args)
         {
-            //using a hash table to prevent repeated values and to get an accurate count
+            //using a hash to prevent repeated values and to get an accurate count
             //using the stack to make use of popping and pushing to check each line
             HashSet<int> hash = new HashSet<int>();
             Stack<int> stack = new Stack<int>();

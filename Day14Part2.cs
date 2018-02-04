@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,12 @@ namespace AdventCalendar2017
 
         static void Main(string[] args)
         {
-            StreamReader file = new StreamReader(@"C:\Users\Michael Weiss\repo-ster\AdventCalendarCSharp\inputs\knothash_input_day14_2.txt");
+            WebClient client = new WebClient();
+
+            Stream stream = client.OpenRead("https://raw.githubusercontent.com/mweiss9676/AdventCalendarCSharp/master/inputs/knothash_input_day14_2.txt");
+            //Stream streamTEST = client.OpenRead("https://raw.githubusercontent.com/mweiss9676/AdventCalendarCSharp/master/inputs/knothash_input_day14_2_TEST.txt");
+
+            StreamReader file = new StreamReader(stream);
 
             //this assignment in the if statement is a major pain in the ass, don't forget it!!!
             if ((inputArray[0] = file.ReadLine().ToArray()) != null)
