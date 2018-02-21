@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdventCalendar2017
+namespace Day11
 {
-    class Day11
+    public class Part1
     {
         //global variable to keep track of the furthest distance the "child program" wandered.
         static int furthestDistance = 0;
 
-        static void Main(String[] args)
+        public static void Run()
         {
             //grab the input from my file. Source @ http://adventofcode.com/2017/day/11
             try
@@ -79,7 +79,7 @@ namespace AdventCalendar2017
             z = Math.Abs(z);
 
             //a clever way to return the max integer value between more than 2 values
-            int result = new[] { x, y, z }.Max();                        
+            int result = new[] { x, y, z }.Max();
 
             Console.WriteLine("The absolute value of the largest coordinate, and therefore the distance along "
                 + "a hexagonal grid is: {0}", result);
@@ -95,9 +95,9 @@ namespace AdventCalendar2017
 
             int max = new int[] { x, y, z }.Max();
             if (max > furthestDistance) { furthestDistance = max; Console.WriteLine(furthestDistance); }
-            
-            
-            
+
+
+
         }
     }
 }

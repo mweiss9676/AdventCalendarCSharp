@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D5FF00DF-810B-4B62-A0A5-507D97594AB6}</ProjectGuid>
+    <ProjectGuid>{11C913C6-1C4C-42A2-9551-F0A73FABEBAF}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AdventCalendar2017</RootNamespace>
-    <AssemblyName>AdventCalendar2017</AssemblyName>
+    <RootNamespace>Day11</RootNamespace>
+    <AssemblyName>Day11</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>AdventCalendar2017.Day21</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,27 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="asdfads.cs" />
-    <Compile Include="Day10.cs" />
-    <Compile Include="Day10Part2.cs" />
-    <Compile Include="Day11.cs" />
-    <Compile Include="Day12.cs" />
-    <Compile Include="Day12Part2.cs" />
-    <Compile Include="Day13.cs" />
-    <Compile Include="Day14.cs" />
-    <Compile Include="Day14Part2.cs" />
-    <Compile Include="Day15.cs" />
-    <Compile Include="Day15Part2.cs" />
-    <Compile Include="Day16.cs" />
-    <Compile Include="Day16Part2.cs" />
-    <Compile Include="Day17.cs" />
-    <Compile Include="Day17Part2.cs" />
-    <Compile Include="Day18.cs" />
-    <Compile Include="Day19.cs" />
-    <Compile Include="Day20Classes\Day20.cs" />
-    <Compile Include="Day20Classes\Day20Part2.cs" />
-    <Compile Include="Day20Classes\Particle.cs" />
-    <Compile Include="Day21.cs" />
+    <Compile Include="Part1.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

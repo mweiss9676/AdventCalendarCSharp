@@ -4,17 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
-//this program written to achieve this: http://adventofcode.com/2017/day/10
-namespace AdventCalendar2017
+namespace Day10
 {
-    class Day10Part2
+    public class Part2
     {
         //denseHash will be what we convert for out final output so I have made it class level and static
         //it is designed to hold our 16 XOR'd numbers
         static List<int> denseHash = new List<int>();
 
-        public static void Main(string[] args)
+        public static void Run()
         {
             //create a list populated with the numbers 0-255 as per the instructions
             List<int> input = new List<int>();
@@ -22,7 +20,7 @@ namespace AdventCalendar2017
 
             //a list to hold our "lengths" that we are basing our iterations on
             List<int> rules = new List<int> { 225, 171, 131, 2, 35, 5, 0, 13, 1, 246, 54, 97, 255, 98, 254, 110 };
-            
+
             //List<int> rules = new List<int> { 1,2,3 }; //(this is a list I was using to test)
 
             //run a KnotHash function on our list of 255 numbers sequential, and our "lengths" converted to their ASCII counterparts
@@ -99,7 +97,7 @@ namespace AdventCalendar2017
                 for (int j = 0; j < rules.Count; j++)
                 {
 
-                    
+
                     int currentPositionCopy = currentPosition;
                     int currentPositionCopy2 = currentPosition;
                     currentSubSetCount = rules[j];
@@ -161,5 +159,6 @@ namespace AdventCalendar2017
             //foreach (int i in input) { Console.Write(i + ","); }
             BitwiseXOR(input);
         }
+
     }
 }
