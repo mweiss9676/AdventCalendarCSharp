@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>AdventCalendar2017.Day20Part2</StartupObject>
+    <StartupObject>AdventCalendar2017.Day21</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="asdfads.cs" />
     <Compile Include="Day10.cs" />
     <Compile Include="Day10Part2.cs" />
     <Compile Include="Day11.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Day20Classes\Day20.cs" />
     <Compile Include="Day20Classes\Day20Part2.cs" />
     <Compile Include="Day20Classes\Particle.cs" />
+    <Compile Include="Day21.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
