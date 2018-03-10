@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Day10;
 
-
-//UGLIEST CODE EVERRRRRRRRR!!!!!!!
 //this program written to achieve this: http://adventofcode.com/2017/day/14
 namespace Day14
 {
@@ -24,205 +23,143 @@ namespace Day14
         //then for some reason I call knothash from within this method
         static void NumberTheInputs(string inputToAddend)
         {
-            List<int> numbers0To255 = Enumerable.Range(0, 256).ToList();
-            foreach (int item in numbers0To255)
-            {
-                Console.WriteLine(item);
-            }
-            //List<int> input;
-            string inputToAddendCopy = inputToAddend;
+            List<string> inputs = new List<string>();
+
+            string inputCopy = inputToAddend;
 
             for (int i = 0; i < 128; i++)
             {
-                //input = new List<int>();
-
-                //for (int j = 0; j < 256; j++)
-                //{
-                //    input.Add(j);
-                //}
-
-                inputToAddend = inputToAddendCopy;
-                inputToAddend += "-" + i;
-                KnotHash(input: numbers0To255, rules: AsciiConverter(inputToAddend.ToCharArray()));
+                inputToAddend = inputCopy;
+                inputToAddend += "-" + i.ToString();
+                inputs.Add(inputToAddend);
             }
+
+            int count = 0;
+
+            foreach (string s in inputs)
+            {
+                List<int> numbers0To255 = Enumerable.Range(0, 256).ToList();
+
+                List<int> AsciiConverted = AsciiConverter(s);
+
+                List<int> KnotHashed = Day10.Part2.KnotHash(input: numbers0To255, rules: AsciiConverted);
+
+                List<int> bitWiseInts = Day10.Part2.BitwiseXOR(KnotHashed);
+
+                string result = Day10.Part2.ConvertToHex(bitWiseInts);
+
+                string binary = convertToBinary(result);
+
+                Console.WriteLine(binary);
+
+                CountOnes(binary);
+
+                count++;
+            }
+
             Console.WriteLine(globalcount);
+
+
         }
 
-        //creates an ASCII conversion of each NumberTheInputs string (i.e. stpzcrnm-1 becomes 115 116 112 122 99 114 110 109 45 48 17 31 73 47 23)
-        static List<int> AsciiConverter(char[] rules)
+        //creates an ASCII conversion of each NumberTheInputs string (i.e. stpzcrnm-1 becomes 115 116 112 122 99 114 110 109 45 49 17 31 73 47 23)
+        public static List<int> AsciiConverter(string rule)
         {
-            List<int> rulesReturn = new List<int>();
-            int size = rules.Count();
+            List<int> converted = new List<int>();
 
-            foreach (char c in rules)
+            //concatenate all integers in rules as comma separated values in a string
+
+            foreach (char c in rule)
             {
-                //Console.WriteLine(c);
                 //converting characters to integers creates their ASCII counterparts
                 int unicode = c;
-                rulesReturn.Add(unicode);
+                converted.Add(unicode);
             }
 
             //add this end sequence as provided by the instructions
             int[] endSequence = { 17, 31, 73, 47, 23 };
 
-            rulesReturn.AddRange(endSequence);
-            //Console.WriteLine("ascii is: ");
-            //rulesReturn.ForEach(x => Console.Write(x + " "));
-            //Console.WriteLine();
-            return rulesReturn;
+            converted.AddRange(endSequence);
+            return converted;
         }
 
-        //got here from KnotHash method
-        //XORs each KnotHashed result and stores the XORs in a denseHash list
-        //calls the final method CountOnes to count all of the 1'inputToAddend in the denseHash
-        static void BitwiseXOR(List<int> input)
+        public static string convertToBinary(string hexvalue)
         {
-            List<int> denseHash = new List<int>();
+            string result = "";
 
-            //temp is a temporary storage place for our XOR function to act upon. It holds our input 16 digits at a time.
-            List<int> temp;
-            int length = input.Count();
-
-            //iterate over the input 16 digits at a time
-            for (int i = 0; i < length; i += 16)
+            foreach (char c in hexvalue)
             {
-                //create a new list called Temp to store each unique set of 16 ints each time i iterates to the next 16
-                temp = new List<int>();
-
-                //add each successive 16 digits into a list called temp
-                for (int j = i; j < i + 16; j++)
+                switch(c)
                 {
-                    temp.Add(input[j]);
+                    case '1':
+                        result += "0001";
+                        break;
+                    case '2':
+                        result += "0010";
+                        break;
+                    case '3':
+                        result += "0011";
+                        break;
+                    case '4':
+                        result += "0100";
+                        break;
+                    case '5':
+                        result += "0101";
+                        break;
+                    case '6':
+                        result += "0110";
+                        break;
+                    case '7':
+                        result += "0111";
+                        break;
+                    case '8':
+                        result += "1000";
+                        break;
+                    case '9':
+                        result += "1001";
+                        break;
+                    case '0':
+                        result += "0000";
+                        break;
+                    case 'a':
+                        result += "1010";
+                        break;
+                    case 'b':
+                        result += "1011";
+                        break;
+                    case 'c':
+                        result += "1100";
+                        break;
+                    case 'd':
+                        result += "1101";
+                        break;
+                    case 'e':
+                        result += "1110";
+                        break;
+                    case 'f':
+                        result += "1111";
+                        break;
+                    default:
+                        Console.WriteLine("something went wrong");
+                        break;
                 }
-
-                //lambda function to perform the same function over an entire collection and return one result.
-                //In this case the ^ or XOR function
-                int XOR = temp.Aggregate((x, y) => x ^ y);
-
-                //add each XOR aggregate integer to our denseHash list of 16 ints
-                denseHash.Add(XOR);
             }
-            //Console.WriteLine("every value in hex is: ");
-            //denseHash.ForEach(x => Console.Write("{0} ", x.ToString("x2")));
-            //Console.WriteLine();
-            //Console.WriteLine();
-            //Console.WriteLine("every value post-Xor is: ");
-            //denseHash.ForEach(x => Console.Write(x + " "));
-            //Console.WriteLine();
-            //Console.WriteLine();
-            denseHash.ForEach(x => Console.Write("{0}", Convert.ToString(x, 2).PadLeft(8, '0')));
-            Console.WriteLine();
-            CountOnes(denseHash);
 
+            return result;
 
         }
 
         //counts all the ones in the denseHash list by converting them to strings and seeing the chars in the strings are 1'inputToAddend
         //if so they add their particular number of 1'inputToAddend to the global static variable global count and write this information to the console.
-        static void CountOnes(List<int> d)
+        static void CountOnes(string input)
         {
-            List<string> copy = new List<string>();
-            foreach (int i in d)
+            foreach (char c in input)
             {
-                copy.Add((Convert.ToString(i, 2)));
-            }
-
-            //copy.ForEach(x => Console.Write(x + " "));
-            //Console.WriteLine();
-            int count = 0;
-            foreach (string s in copy)
-            {
-                foreach (char c in s)
+                if (c == '1')
                 {
-                    if (c.Equals('1'))
-                    {
-                        count++;
-                    }
+                    globalcount++;
                 }
             }
-
-            globalcount += count;
-            //Console.WriteLine("count is: {0} and row is {1}", count, row);
-            //row++;
-            //Console.WriteLine("global count is: " + globalcount);
-        }
-
-        //code from Day10 part2
-        //got here from the Inputified method
-        //calls BitwiseXOR method on the result of this
-        static void KnotHash(List<int> input, List<int> rules)
-        {
-            int sizeOfInput = input.Count;
-            int skipNumber = 0;
-            int currentSubSetCount = 0;
-            int currentPosition = 0;
-
-            //our original solution to Part 1, with the addition of running it 64 times
-            for (int z = 0; z < 64; z++)
-            {
-                for (int j = 0; j < rules.Count; j++)
-                {
-
-
-                    int currentPositionCopy = currentPosition;
-                    int currentPositionCopy2 = currentPosition;
-                    currentSubSetCount = rules[j];
-                    List<int> copy2 = new List<int>();
-                    List<int> temp = new List<int>();
-
-                    for (int i = 0; i < sizeOfInput; i++)
-                    {
-                        //if currentPosition is less than the size of the input then simply add that digit into copy2
-                        //otherwise the position must be set to zero (the next position "after" the last index) and the process cont.
-                        //this is to keep the current subset at index 0 and make it easier to reverse the subset without dealing with
-                        //whether the subset goes out of bounds by being "longer" than the list
-                        if (currentPosition < sizeOfInput)
-                        {
-                            copy2.Add(input[currentPosition]);
-
-                        }
-                        else
-                        {
-                            currentPosition = 0;
-                            copy2.Add(input[currentPosition]);
-                        }
-
-                        //increment the current position as per the instructions
-                        currentPosition++;
-                    }
-
-                    //copy the subset based on the current "length" in rules into a temp list to be reversed
-                    //then remove that subset from copy2 and replace it with the reversed list
-                    temp = copy2.GetRange(0, currentSubSetCount);
-                    temp.Reverse();
-                    copy2.RemoveRange(0, currentSubSetCount);
-                    copy2.InsertRange(0, temp);
-
-
-                    //this iteration is copying copy2 back into input based on the position moving forward by the skipsize and the 
-                    //current length as per the instructions. It copies the zero index of copy2 into the proper index after "moving"
-                    //of input
-                    for (int k = 0; k < sizeOfInput; k++)
-                    {
-                        if (currentPositionCopy < sizeOfInput)
-                        {
-                            input[currentPositionCopy] = copy2[k];
-                        }
-                        else
-                        {
-                            currentPositionCopy = 0;
-                            input[currentPositionCopy] = copy2[k];
-                        }
-                        currentPositionCopy++;
-                    }
-
-                    //this calculation updates the current position based on the skipnumber and the current "length"
-                    currentPosition = (currentSubSetCount + skipNumber + currentPositionCopy2) % sizeOfInput;
-                    currentPositionCopy2 = currentPosition;
-                    skipNumber++;
-                }
-            }
-            BitwiseXOR(input);
         }
     }
 }

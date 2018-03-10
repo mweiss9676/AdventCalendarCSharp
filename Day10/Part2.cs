@@ -16,26 +16,33 @@ namespace Day10
         {
             //create a list populated with the numbers 0-255 as per the instructions
             List<int> input = new List<int>();
-            for (int i = 0; i < 256; i++) { input.Add(i); }
+            for (int i = 0; i < 256; i++)
+            {
+                input.Add(i);
+            }
 
             //a list to hold our "lengths" that we are basing our iterations on
             List<int> rules = new List<int> { 225, 171, 131, 2, 35, 5, 0, 13, 1, 246, 54, 97, 255, 98, 254, 110 };
+            //List<int> rules = new List<int> { 1, 2, 4 };
 
-            //List<int> rules = new List<int> { 1,2,3 }; //(this is a list I was using to test)
+            List<string> conversionToString = rules.Select(x => x.ToString()).ToList();
 
             //run a KnotHash function on our list of 255 numbers sequential, and our "lengths" converted to their ASCII counterparts
-            KnotHash(input, AsciiConverter(rules));
+            List<int> KnotHashed = KnotHash(input, AsciiConverter(conversionToString));
 
-            //denseHash.ForEach(x => Console.Write(x + " ")); (these 2 lines were used for testing)
-            //Console.WriteLine();
 
             //write the results of our 16 denseHash elements as their hexadecimal counterparts. The "x2" is the conversion and the 
             //number of relevant digits respectively.
-            denseHash.ForEach(x => Console.Write("{0}", x.ToString("x2")));
+            List<int> bitwised = BitwiseXOR(KnotHashed);
+
+            string result = ConvertToHex(bitwised);
+
+            Console.WriteLine(result);
         }
 
-        static List<int> AsciiConverter(List<int> rules)
+        public static List<int> AsciiConverter(List<string> rules)
         {
+            List<int> converted = new List<int>();
             int size = rules.Count();
 
             //concatenate all integers in rules as comma separated values in a string
@@ -45,27 +52,28 @@ namespace Day10
             {
                 //converting characters to integers creates their ASCII counterparts
                 int unicode = c;
-                rules.Add(unicode);
+                converted.Add(unicode);
             }
             rules.RemoveRange(0, size);
 
             //add this end sequence as provided by the instructions
             int[] endSequence = { 17, 31, 73, 47, 23 };
 
-            rules.AddRange(endSequence);
-            return rules;
+            converted.AddRange(endSequence);
+            return converted;
         }
 
-        static void BitwiseXOR(List<int> input)
+        public static List<int> BitwiseXOR(List<int> input)
         {
             //temp is a temporary storage place for our XOR function to act upon. It holds our input 16 digits at a time.
+            List<int> returnList = new List<int>();
             List<int> temp;
             int length = input.Count();
 
             //iterate over the input 16 digits at a time
             for (int i = 0; i < length; i += 16)
             {
-                //create a new list called Temp to store each unique set of 16 ints each time i iterates to the next 16
+                //create a new list called Temp to store each unique set of 16 ints each time i iterate to the next 16
                 temp = new List<int>();
 
                 //add each successive 16 digits into a list called temp
@@ -79,12 +87,12 @@ namespace Day10
                 int XOR = temp.Aggregate((x, y) => x ^ y);
 
                 //add each XOR aggregate integer to our denseHash list of 16 ints
-                denseHash.Add(XOR);
+                returnList.Add(XOR);
             }
-            //denseHash.ForEach(x => Console.WriteLine("denseHash: " + x) ); (used for testing)
+            return returnList;
         }
 
-        static void KnotHash(List<int> input, List<int> rules)
+        public static List<int> KnotHash(List<int> input, List<int> rules)
         {
             int sizeOfInput = input.Count;
             int skipNumber = 0;
@@ -96,8 +104,6 @@ namespace Day10
             {
                 for (int j = 0; j < rules.Count; j++)
                 {
-
-
                     int currentPositionCopy = currentPosition;
                     int currentPositionCopy2 = currentPosition;
                     currentSubSetCount = rules[j];
@@ -156,9 +162,19 @@ namespace Day10
                     skipNumber++;
                 }
             }
-            //foreach (int i in input) { Console.Write(i + ","); }
-            BitwiseXOR(input);
+            return input;
         }
 
+        public static string ConvertToHex(List<int> input)
+        {
+            string result = "";
+
+            foreach (int i in input)
+            {
+                result += i.ToString("x2");
+            }
+
+            return result;
+        }
     }
 }
