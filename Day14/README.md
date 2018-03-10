@@ -122,3 +122,7 @@ I made the console output pretty for fun.
 
 ![islands of colororized blocks](../images/islands.png)
 
+Oh and the answer for how many islands was: 
+
+### Our Answer: 1113
+
