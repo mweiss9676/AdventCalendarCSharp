@@ -1,4 +1,4 @@
-# Day 13 Packet Scanners
+# [Day 13 Packet Scanners](http://adventofcode.com/2017/day/13)
 
 ## Part 1
 
@@ -11,8 +11,8 @@ a layer at depth 1 would start immediately after that.
 Basically here we are tasked with "moving" through a series of "scanners" that are will "catch" you if you happen to be occupying the 
 same index as them on the same iteration of the loop. This turned out to be deceptively difficult. 
 
-This would be an example iteration: 
-![scanner](../images/scanner.png)
+This would be an example iteration:   
+![scanner](../images/scanner.png)   
 
 Here we are "caught" in layers 0 and 6. Our job is to calculate the "severity" of our trip by multiplying the "depth" we are at
 when we are caught by the the "range" of that particular scanner. 
