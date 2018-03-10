@@ -42,22 +42,6 @@ namespace Day13
                 }
             }
             Console.WriteLine(count);
-            //for (int j = 0; j < 1000; j++)
-            //{
-            //    double count = 0;
-            //    int finishLine = j + 93;
-            //    for (int i = j; i < finishLine; i++)
-            //    {
-            //        foreach (KeyValuePair kp in keyValuePairList)
-            //        {
-            //            if (kp.index == i && (i - j) % ((kp.range * 2) - 2) == 0)
-            //            {
-            //                count += (kp.range * kp.index);
-            //            }
-            //        }
-            //    }
-            //    Console.WriteLine("the count is: {0} at an offset value of: {1}", count, j);
-            //}
         }
     }
     class KeyValuePair
