@@ -15,7 +15,6 @@ namespace Day10
             for (int i = 0; i < 256; i++)
             {
                 integersToHash.Add(i);
-
             }
 
             List<int> rules = new List<int> { 225, 171, 131, 2, 35, 5, 0, 13, 1, 246, 54, 97, 255, 98, 254, 110 };

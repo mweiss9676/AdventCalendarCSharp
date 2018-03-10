@@ -16,7 +16,9 @@ namespace Day11
             //grab the input from my file. Source @ http://adventofcode.com/2017/day/11
             try
             {
-                string input = System.IO.File.ReadAllText(@"C:/users/michael/desktop/hexagonaldirections.txt");
+                //System.IO.StreamReader file = new System.IO.StreamReader(@"day13.txt");
+
+                string input = System.IO.File.ReadAllText(@"day11.txt");
                 someFunction(input);
             }
             catch (Exception e)
