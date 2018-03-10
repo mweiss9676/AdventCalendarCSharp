@@ -1,5 +1,7 @@
 ﻿# Day 10 Knot Hash
  
+ ## Part 1
+ 
  >This hash function simulates tying a knot in a circle of string with 256 marks on it. Based on the input to be hashed, the function repeatedly selects a span of string, brings the ends together, and gives the span a half-twist to reverse the order of the marks within it. After doing this many times, the order of the marks is used to build the resulting hash.
  
  ![Hash Function Illustration](../images/Hash-Knot.png)
@@ -35,3 +37,41 @@ In order to overcome that I used this block of code
 ```
 
 resetting the index back to 0 and going from there if the function would otherwise have gone out of bounds
+
+## Part 2
+
+For Part 2 we are going to run the Knot Hash many times in order to get a more randomized result.
+
+1. though, we convert our "rules" to ASCII codes so that no matter what rules we get they are never larger than 255
+
+After we have converted our rules we append them with the following sequence of ASCII codes ( 17, 31, 73, 47, 23 )
+
+```static List<int> AsciiConverter(List<int> rules)
+   {
+       int size = rules.Count();
+
+       //concatenate all integers in rules as comma separated values in a string
+       string rulesString = string.Join(",", rules.ToArray());
+
+       foreach (char c in rulesString)
+       {
+           //converting characters to integers creates their ASCII counterparts
+           int unicode = c;
+           rules.Add(unicode);
+       }
+       rules.RemoveRange(0, size);
+
+       //add this end sequence as provided by the instructions
+       int[] endSequence = { 17, 31, 73, 47, 23 };
+
+       rules.AddRange(endSequence);
+       return rules;
+   }
+```
+
+2. We will run this hash 64 times, producting a "Sparse Hash" of the numbers 0 to 255 in some random order.
+> in order to make this into a "Dense Hash" we will need to reduce this down to 16 numbers by performing a bitwise XOR to combine each 
+> block of 16 numbers into one number.
+
+
+
