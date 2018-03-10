@@ -8,7 +8,7 @@ namespace Day11
 {
     public class Part1
     {
-        //global variable to keep track of the furthest distance the "child program" wandered.
+        //class-level variable to keep track of the furthest distance the "child program" wandered.
         static int furthestDistance = 0;
 
         public static void Run()
