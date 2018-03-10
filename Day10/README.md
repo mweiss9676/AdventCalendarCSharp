@@ -38,6 +38,8 @@ In order to overcome that I used this block of code
 
 resetting the index back to 0 and going from there if the function would otherwise have gone out of bounds
 
+### Our Answer: 23874
+
 ## Part 2
 
 For Part 2 we are going to run the Knot Hash many times in order to get a more randomized result.
@@ -73,5 +75,8 @@ After we have converted our rules we append them with the following sequence of 
 > in order to make this into a "Dense Hash" we will need to reduce this down to 16 numbers by performing a bitwise XOR to combine each 
 > block of 16 numbers into one number.
 
+![bitwise-xor](../images/bitwise-xor.png)
 
+3. Finally we represent the Knot Hash as a single hexadecimal string by taking the 16 numbers from the previous step and comgining them in to one hexadecimal string of length 32. This is our final answer to Part 2
 
+## Our Answer: e1a65bfb5a5ce396025fab5528c25a87
