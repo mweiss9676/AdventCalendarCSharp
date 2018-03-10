@@ -34,8 +34,6 @@ namespace Day14
                 inputs.Add(inputToAddend);
             }
 
-            int count = 0;
-
             foreach (string s in inputs)
             {
                 List<int> numbers0To255 = Enumerable.Range(0, 256).ToList();
@@ -53,8 +51,6 @@ namespace Day14
                 Console.WriteLine(binary);
 
                 CountOnes(binary);
-
-                count++;
             }
 
             Console.WriteLine(globalcount);
