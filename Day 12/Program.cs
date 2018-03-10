@@ -10,8 +10,8 @@ namespace Day_12
     {
         static void Main(string[] args)
         {
-            //Part1.Run();
-            Part2.Run();
+            Part1.Run();
+            //Part2.Run();
         }
     }
 }
