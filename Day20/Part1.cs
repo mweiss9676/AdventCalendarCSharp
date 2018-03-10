@@ -14,9 +14,9 @@ namespace Day20
             //"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day20TEST.txt"
             //"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day20.txt"
 
-            StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day20.txt");
+            StreamReader sr = new StreamReader(@"day20.txt");
 
-            int lineCount = File.ReadAllLines(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day20.txt").Count();
+            int lineCount = File.ReadAllLines(@"day20.txt").Count();
 
             List<Particle> particles = new List<Particle>();
 

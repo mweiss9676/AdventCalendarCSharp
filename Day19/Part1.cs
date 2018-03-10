@@ -18,8 +18,8 @@ namespace Day19
         public static void Run()
         {
             //To use test input, need to add "TEST" to the end of file path, and change 'N' to 'F'
-            StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day19.txt");
-            lineCount = File.ReadLines(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day19.txt").Count();
+            StreamReader sr = new StreamReader(@"day19.txt");
+            lineCount = File.ReadLines(@"day19.txt").Count();
 
             //read each line into the char[][] input
             input = new char[lineCount][];

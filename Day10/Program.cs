@@ -13,7 +13,5 @@ namespace Day10
             Part1.Run();
             Part2.Run();
         }
-
-
     }
 }

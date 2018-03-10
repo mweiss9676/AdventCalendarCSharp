@@ -32,9 +32,11 @@ namespace Day18
         
         public static void Run()
         {
-            StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day18_input.txt");
+            //Actual input below
+            StreamReader sr = new StreamReader(@"day18.txt");
+
             //Below is the testing input. Above the actual input.
-            //StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day18_inputTEST.txt");
+            //StreamReader sr = new StreamReader(@"day18TEST.txt");
 
 
             //The next 15 lines just read the input and store it in a 2D array of strings

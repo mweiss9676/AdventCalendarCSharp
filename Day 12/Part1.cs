@@ -13,7 +13,7 @@ namespace Day_12
     {
         //from stackoverflow suggestion @https://stackoverflow.com/questions/47907811/trying-to-parse-a-text-file-line-by-line-and-split-lines-into-a-jagged-array-of
         //using the LINQ library to parse the file line by line 
-        static string[][] input = File.ReadAllLines(@"c:/users/michael/desktop/day12.txt")
+        static string[][] input = File.ReadAllLines(@"day12.txt")
           .Select(x => x.Split(' '))
           .ToArray();
 

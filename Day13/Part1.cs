@@ -16,7 +16,7 @@ namespace Day13
             char myExpression = ':';
             try
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(@"c:/users/michael/desktop/day13.txt");
+                System.IO.StreamReader file = new System.IO.StreamReader(@"day13.txt");
 
                 string line;
                 while ((line = file.ReadLine()) != null)

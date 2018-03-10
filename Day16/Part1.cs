@@ -14,7 +14,7 @@ namespace Day16
 
         public static void Run()
         {
-            StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\repo-ster\AdventCalendarCSharp\inputs\Day16input.txt");
+            StreamReader sr = new StreamReader(@"day16.txt");
 
             //put the entire file into a string then separate that string into arrays of strings
             //based on their commas

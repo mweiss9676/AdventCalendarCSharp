@@ -6,20 +6,25 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 
+//Written to achieve this http://adventofcode.com/2017/day/12
 namespace Day_12
 {
     public class Part2
     {
         //from stackoverflow suggestion @https://stackoverflow.com/questions/47907811/trying-to-parse-a-text-file-line-by-line-and-split-lines-into-a-jagged-array-of
         //using the LINQ library to parse the file line by line 
-        static string[][] input = File.ReadAllLines(@"c:/users/michael/desktop/day12.txt")
+
+        //ACTUAL DATA HERE
+        static string[][] input = File.ReadAllLines(@"day12.txt")
           .Select(x => x.Split(' '))
           .ToArray();
-        /*static string[][] input = File.ReadAllLines(@"c:/users/michael/desktop/day12test.txt")
-          .Select(x => x.Split(' '))
-          .ToArray();*/
 
-        static void Main(string[] args)
+        //TEST DATA BELOW
+        //static string[][] input = File.ReadAllLines(@"day12TEST.txt")
+        //  .Select(x => x.Split(' '))
+        //  .ToArray();
+
+        public static void Run()
         {
             //using a hash table to prevent repeated values and to get an accurate count
             //using the stack to make use of popping and pushing to check each line

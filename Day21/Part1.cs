@@ -12,24 +12,24 @@ namespace Day21
     {
         static Dictionary<string, string> instructions = new Dictionary<string, string>();
 
-        static string fullInput = ".#...####";
+        static string fullInput = "#..#........#..#";
         static string size2String = "";
         static string size3String = "";
 
 
-        static List<string> size3List = new List<string>();
-        static List<string> size2List = new List<string>();
+        //static List<string> size3List = new List<string>();
+        //static List<string> size2List = new List<string>();
 
 
-        static int count = 0, iterations = 3;
+        static int count = 0, iterations = 4;
 
         public static void Run()
         {
             //test
-            StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day21InputTEST.txt");
+            //StreamReader sr = new StreamReader(@"day21TEST.txt");
 
             //real
-            //StreamReader sr = new StreamReader(@"C:\Users\Michael Weiss\Documents\repo-ster\Advent_of_Code_2017\AdventCalendarCSharp\inputs\Day21Input.txt");
+            StreamReader sr = new StreamReader(@"day21.txt");
 
             List<string[]> inputOutput = new List<string[]>();
             while (!sr.EndOfStream)
@@ -88,8 +88,9 @@ namespace Day21
                 {
                     Size2FlipperRotator(s);
                 }
-                //RefactorSize3();
-                Start(size2String);
+                //size2List.Clear();
+                RefactorEvensIntoThrees();
+                //Start(size2String);
             }
             else if (input.Length % 3 == 0)
             {
@@ -111,8 +112,9 @@ namespace Day21
                 {
                     Size3FlipperRotator(s);
                 }
-                //RefactorSize2();
-                Start(size3String);
+                //size3List.Clear();
+                //RefactorEvens();
+                //Start(size3String);
             }
             else
             {
@@ -120,11 +122,11 @@ namespace Day21
             }
         }
 
-        private static void RefactorSize2()
+        private static void NameUndecided(string input)
         {
             string temp = "";
 
-            int size = size3String.Length;
+            int size = input.Length;
             int squareRoot = (int)Math.Sqrt(size);
             //int quarter = size / 4;
             int half = size / 2;
@@ -133,7 +135,7 @@ namespace Day21
             {
                 for (int j = i; j < squareRoot + i; j += 2)
                 {
-                    temp += size3String.Substring(j, 2) + size3String.Substring(j + squareRoot, 2);
+                    temp += input.Substring(j, 2) + input.Substring(j + squareRoot, 2);
                 }
             }
             //int size = size3String.Length;
@@ -151,18 +153,20 @@ namespace Day21
             Start(temp);
         }
 
-        private static void RefactorSize3()
+        private static void RefactorEvensIntoThrees()
         {
             string temp = "";
             int size = size2String.Length;
             int squareRoot = (int)Math.Sqrt(size);
             int third = size / 3;
+            int half = size / 2;
+            int quarter = size / 4;
 
-            for (int i = 0; i < size; i += third)
+            for (int i = 0; i < size; i += half)
             {
-                for (int j = i; j < squareRoot + i; j += 3)
+                for (int j = 0; j < quarter; j += 3)
                 {
-                    temp += size2String.Substring(j, 3) + size2String.Substring(j + squareRoot, 3) + size2String.Substring(j + squareRoot * 2, 3);
+                    temp += size2String.Substring(j, 3) + size2String.Substring(j + quarter, 3);
                 }
             }
             Start(temp);
@@ -170,6 +174,8 @@ namespace Day21
 
         private static void Size3FlipperRotator(string input)
         {
+            List<string> temp = new List<string>();
+
             string original = input;
             string originalReversed = new string(original.ToCharArray().Reverse().ToArray());
             string firstOfEach = input[6].ToString() + input[3] + input[0] + input[7] + input[4] + input[1] + input[8] + input[5] + input[2];
@@ -179,16 +185,16 @@ namespace Day21
             string firstOfEachFlipped = firstOfEach.Substring(6, 3) + firstOfEach.Substring(3, 3) + firstOfEach.Substring(0, 3);
             string firstOfEachFlippedReversed = new string(firstOfEachFlipped.ToCharArray().Reverse().ToArray());
 
-            size3List.Add(original);
-            size3List.Add(originalReversed);
-            size3List.Add(originalFlipped);
-            size3List.Add(originalFlippedReversed);
-            size3List.Add(firstOfEach);
-            size3List.Add(firstOfEachFlipped);
-            size3List.Add(firstOfEachFlippedReversed);
-            size3List.Add(firstOfEachReversed);
+            temp.Add(original);
+            temp.Add(originalReversed);
+            temp.Add(originalFlipped);
+            temp.Add(originalFlippedReversed);
+            temp.Add(firstOfEach);
+            temp.Add(firstOfEachFlipped);
+            temp.Add(firstOfEachFlippedReversed);
+            temp.Add(firstOfEachReversed);
 
-            foreach (string s in size3List)
+            foreach (string s in temp)
             {
                 if (instructions.ContainsKey(s))
                 {
@@ -200,6 +206,8 @@ namespace Day21
 
         private static void Size2FlipperRotator(string input)
         {
+            List<string> temp = new List<string>();
+
             string original = input;
             string originalReversed = new string(original.ToCharArray().Reverse().ToArray());
             string firstOfEach = original[2].ToString() + original[0] + original[3] + original[1];
@@ -209,16 +217,16 @@ namespace Day21
             string firstOfEachFlipped = firstOfEach.Substring(2, 2) + firstOfEach.Substring(0, 2);
             string firstOfEachFlippedReversed = new string(firstOfEachFlipped.ToCharArray().Reverse().ToArray());
 
-            size2List.Add(original);
-            size2List.Add(originalReversed);
-            size2List.Add(originalFlipped);
-            size2List.Add(originalFlippedReversed);
-            size2List.Add(firstOfEach);
-            size2List.Add(firstOfEachFlipped);
-            size2List.Add(firstOfEachFlippedReversed);
-            size2List.Add(firstOfEachReversed);
+            temp.Add(original);
+            temp.Add(originalReversed);
+            temp.Add(originalFlipped);
+            temp.Add(originalFlippedReversed);
+            temp.Add(firstOfEach);
+            temp.Add(firstOfEachFlipped);
+            temp.Add(firstOfEachFlippedReversed);
+            temp.Add(firstOfEachReversed);
 
-            foreach (string s in size2List)
+            foreach (string s in temp)
             {
                 if (instructions.ContainsKey(s))
                 {

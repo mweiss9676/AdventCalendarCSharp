@@ -45,9 +45,7 @@ namespace Day14
                 inputToAddend += "-" + i;
                 KnotHash(input: numbers0To255, rules: AsciiConverter(inputToAddend.ToCharArray()));
             }
-
             Console.WriteLine(globalcount);
-
         }
 
         //creates an ASCII conversion of each NumberTheInputs string (i.e. stpzcrnm-1 becomes 115 116 112 122 99 114 110 109 45 48 17 31 73 47 23)

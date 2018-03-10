@@ -22,10 +22,10 @@ namespace Day14
         {
             WebClient client = new WebClient();
 
-            Stream stream = client.OpenRead("https://raw.githubusercontent.com/mweiss9676/AdventCalendarCSharp/master/inputs/knothash_input_day14_2.txt");
-            //Stream streamTEST = client.OpenRead("https://raw.githubusercontent.com/mweiss9676/AdventCalendarCSharp/master/inputs/knothash_input_day14_2_TEST.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader(@"day14.txt");
+            //System.IO.StreamReader file = new System.IO.StreamReader(@"day14TEST.txt");
 
-            StreamReader file = new StreamReader(stream);
+            //Stream streamTEST = client.OpenRead("https://raw.githubusercontent.com/mweiss9676/AdventCalendarCSharp/master/inputs/knothash_input_day14_2_TEST.txt");
 
             //this assignment in the if statement is a major pain in the ass, don't forget it!!!
             if ((inputArray[0] = file.ReadLine().ToArray()) != null)
