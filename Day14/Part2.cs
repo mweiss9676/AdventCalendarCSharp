@@ -13,7 +13,7 @@ namespace Day14
     {
         static Queue<char> Regions = new Queue<char>(new char[] { '2', '3', '4', '5', '6', '7', '8', '9' });
         static char letter;
-        static char[][] inputArray = new char[127][];
+        static char[][] inputArray = new char[128][];
 
         static int count = 0;
 
@@ -25,12 +25,13 @@ namespace Day14
             System.IO.StreamReader file = new System.IO.StreamReader(@"day14.txt");
             //System.IO.StreamReader file = new System.IO.StreamReader(@"day14TEST.txt");
 
+            //This is a neat way to grab file from the internet. Leaving it so as to not forget it.
             //Stream streamTEST = client.OpenRead("https://raw.githubusercontent.com/mweiss9676/AdventCalendarCSharp/master/inputs/knothash_input_day14_2_TEST.txt");
 
             //this assignment in the if statement is a major pain in the ass, don't forget it!!!
             if ((inputArray[0] = file.ReadLine().ToArray()) != null)
             {
-                for (int i = 1; i < 127; i++)
+                for (int i = 1; i < 128; i++)
                 {
                     inputArray[i] = file.ReadLine().ToArray();
                 }
