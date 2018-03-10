@@ -4,9 +4,34 @@
  
  ![Hash Function Illustration](../images/Hash-Knot.png)
 
->To achieve this, begin with a list of numbers from 0 to 255, a current position which begins at 0 (the first element in the list), a skip size (which starts at 0), and a sequence of lengths (your puzzle input). Then, for each length:
+>To achieve this, begin with a list of numbers from 0 to 255, a current position which begins at 0 (the first element in the list), a skip size (which starts at 0), and a sequence of lengths:
+>> _225,171,131,2,35,5,0,13,1,246,54,97,255,98,254,110  <-- my actual input_
+>
+> Then, for each length:   
+> 1. Reverse the order of that length of elements in the list, starting with the element at the current position.
+> 2. Move the current position forward by that length plus the skip size.
+> 3. Increase the skip size by one.
+> The list is circular; if the current position and the length try to reverse elements beyond the end of the list, the operation reverses using as many extra elements as it needs from the front of the list. If the current position moves past the end of the list, it wraps around to the front. Lengths larger than the size of the list are invalid.
 
->Reverse the order of that length of elements in the list, starting with the element at the current position.
-Move the current position forward by that length plus the skip size.
-Increase the skip size by one.
-The list is circular; if the current position and the length try to reverse elements beyond the end of the list, the operation reverses using as many extra elements as it needs from the front of the list. If the current position moves past the end of the list, it wraps around to the front. Lengths larger than the size of the list are invalid.
+So basically we are taking sections of a collection of integers from 0 to 255, called our 'input', and based on a number from a set of "rules", then we reverse that section of our input and then move our current position forward by that "rule" number + our 'skip-size' which is just an integer that starts at 0 and increments by one each iteration. We do this for each of our "rules" and then we multiply the first 2 numbers of our now scrambled 'input' together to verify whether we performed this function correctly. 
+
+The real challenge of this Day was the fact that C# doesn't provide a way to stop you from going over the end of a collection and ending up with OutOfBounds Exceptions. 
+
+In order to overcome that I used this block of code
+
+```   for (int j = 0; j < integersToHashSize; j++)
+{
+    if (copyOfCurrentIndex1 < integersToHashSize)//while the current index is within the bounds of the list we copy
+    {                                            //the values in the copy of our main list back into the official list
+        integersToHash[copyOfCurrentIndex1] = copyOfIntegersToHash[j];
+    }
+    else                                         //once the current index would go out of bounds of the array we reset the index
+    {                                            //and continue to add the copy values back into the official list
+        copyOfCurrentIndex1 = 0;
+        integersToHash[copyOfCurrentIndex1] = copyOfIntegersToHash[j];
+    }
+    copyOfCurrentIndex1++;
+}
+```
+
+resetting the index back to 0 and going from there if the function would otherwise have gone out of bounds
