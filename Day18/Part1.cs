@@ -99,7 +99,7 @@ namespace Day18
                 }
 
                 //If the instructions at position 3 is a letter instead of a "long" 
-                //then this block changes that lettler to its associated value for the duration of the iteration
+                //then this block changes that letter to its associated value for the duration of the iteration
                 //changed back because it trips the hasLetterChanged bool at the beginning of the loop
                 if (!IsInt(instructions[j][2]))
                 {
