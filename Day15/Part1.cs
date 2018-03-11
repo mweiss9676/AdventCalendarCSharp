@@ -30,7 +30,7 @@ namespace Day15
                 genAPreviousState = (generatorA * genAPreviousState) % divideBy; //the hashing algorithm
                 genBPreviousState = (generatorB * genBPreviousState) % divideBy;
 
-                if (GeneratorAString.Equals(GeneratorBString)) // C hecks to see if each string matches the other. Increments the count when the match.
+                if (GeneratorAString.Equals(GeneratorBString)) // Checks to see if each string matches the other. Increments the count when the match.
                 {
                     count++;
                 }
