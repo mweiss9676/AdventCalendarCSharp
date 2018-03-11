@@ -1,7 +1,7 @@
 [Day 17 Spinlock](http://adventofcode.com/2017/day/17)
 
 
-Today's Instructions: 
+Today's task: 
 
 >This spinlock's algorithm is simple but efficient, quickly consuming everything in its path. It starts with a circular buffer 
 containing only the value 0, which it marks as the current position. It then steps forward through the circular buffer some number
@@ -58,4 +58,8 @@ After a number of different attempts at designing the algorithm here I eventuall
     return numberAfter2017;
 }
 ```
+
+### Our Answer: 1971
+
+
 
