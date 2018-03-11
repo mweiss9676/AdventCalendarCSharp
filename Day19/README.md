@@ -27,7 +27,7 @@ When you come across a + symbol that indicates that we've hit a corner. At this 
 going to be. Here we check first by seeing what direction we came from, because we can't turn back around so therefore our new 
 direction has to be a perpendicular one. 
 
-![new direction](../images/day19-direction)
+![new direction](../images/day19-direction.png)
 
 After all of this we end up with 
 
