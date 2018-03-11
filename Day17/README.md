@@ -1,4 +1,4 @@
-[Day 17 Spinlock](http://adventofcode.com/2017/day/17)
+# [Day 17 Spinlock](http://adventofcode.com/2017/day/17)
 
 
 Today's task: 
