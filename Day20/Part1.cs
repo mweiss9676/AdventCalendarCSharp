@@ -42,7 +42,6 @@ namespace Day20
         static long DistanceFromOriginCalculator(Particle p)
         {
             long distance = p.Position.Aggregate((x, y) => Math.Abs(x) + Math.Abs(y));
-            //Console.WriteLine($"{p.Name} is {distance} far from the origin.");
             return distance;
         }
 
@@ -68,7 +67,6 @@ namespace Day20
                         positions.Add(p, DistanceFromOriginCalculator(p));
                     }
                 }
-                //Console.WriteLine();
             }
 
             ClosestParticle(positions);
