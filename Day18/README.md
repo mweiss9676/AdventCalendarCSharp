@@ -17,15 +17,15 @@ There are only a few instructions:
 * jgz X Y *jumps* with an offset of Y, but only if X > 0 (negatives allowed)
 
 Our input looks like: 
-![day 18 registers instructions](../images/registers)
+![day 18 registers instructions](../images/registers.png)
 
 An interesting way to handle this problem is a Dictionary of string(letters) Keys with Action Values. 
 This seems like it would be a pretty straightforward solution to parse the input file by the first letter and adjust the value contained by that letter accordingly but there are a couple of things
 that can make this a little more complicated. 
 
-![A screenshot of a dictionary of string action pairs](../images/day18-dictionary)
+![A screenshot of a dictionary of string action pairs](../images/day18-dictionary.png)
 <br>
-![A screenshot of some of the actions from Day 18](../images/day18-actions)
+![A screenshot of some of the actions from Day 18](../images/day18-actions.png)
 
 The first is that some of the instructions (like the second from the bottom) have no third 
 value. If you were to try to parse this file with no third value when it was expected, the machine would throw a not set to instance of object
