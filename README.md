@@ -5,7 +5,7 @@
 
 ## Choose a Day for More Information
 
-- [Day 10 - Knot Hash](https://github.com/mweiss9676/AdventCalendarCSharp/tree/master/Day10/README.md)  
+- [Day 10 - Knot Hash](../Day10/README.md)  
 - [Day 11](https://github.com/mweiss9676/AdventCalendarCSharp/tree/master/Day11/README.md)  
 - [Day 12](https://github.com/mweiss9676/AdventCalendarCSharp/tree/master/Day12/README.md)  
 - [Day 13](https://github.com/mweiss9676/AdventCalendarCSharp/tree/master/Day13/README.md)  
